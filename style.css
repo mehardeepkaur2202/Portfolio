@@ -1012,7 +1012,7 @@ footer p{
 }
 @media(max-width:900px){
   .hero{grid-template-columns:1fr;padding-top:100px;text-align:center;}
-  .hero-right{display:none;}
+  .hero-right{display:flex;}
   .about{grid-template-columns:1fr;}
   .services-grid{grid-template-columns:1fr;}
   .section-header{grid-template-columns:auto 1fr;}
@@ -1023,6 +1023,8 @@ footer p{
   .cta-row{justify-content:center;}
   .video-grid{grid-template-columns:repeat(2,1fr);}
   .design-gallery{grid-template-columns:repeat(2,1fr);}
+  .hero-right{display:flex; height:50vh;}
+  .blob-wrap{width:min(280px,70%);}
 }
 @media(max-width:500px){
   .video-grid{grid-template-columns:1fr 1fr;}
