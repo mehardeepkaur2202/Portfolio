@@ -1,40 +1,410 @@
-// ── Loader
-window.addEventListener('load', () => {
-  setTimeout(() => {
-    document.getElementById('loader').classList.add('done');
-  }, 1500);
+// =====================
+// LOADER
+// =====================
+
+window.addEventListener("load",()=>{
+
+setTimeout(()=>{
+
+document
+.getElementById("loader")
+.classList.add("done");
+
+},1500);
+
 });
 
-// ── Cursor
-const cursor = document.getElementById('cursor');
-const trail = document.getElementById('cursor-trail');
-let mx = 0, my = 0, tx = 0, ty = 0;
 
-document.addEventListener('mousemove', e => {
-  mx = e.clientX; my = e.clientY;
-  cursor.style.transform = `translate(${mx - 7}px,${my - 7}px)`;
+
+
+// =====================
+// CUSTOM CURSOR
+// =====================
+
+
+const cursor = document.getElementById("cursor");
+const trail = document.getElementById("cursor-trail");
+
+
+let mouseX = 0;
+let mouseY = 0;
+
+let trailX = 0;
+let trailY = 0;
+
+
+
+document.addEventListener("mousemove",(e)=>{
+
+mouseX = e.clientX;
+mouseY = e.clientY;
+
+
+cursor.style.transform =
+`translate(${mouseX-7}px,${mouseY-7}px)`;
+
 });
 
-(function animTrail() {
-  tx += (mx - tx) * .12;
-  ty += (my - ty) * .12;
-  trail.style.transform = `translate(${tx - 19}px,${ty - 19}px)`;
-  requestAnimationFrame(animTrail);
-})();
 
-document.querySelectorAll('a,button,.video-card,.design-card,.service-item,.skill-tag').forEach(el => {
-  el.addEventListener('mouseenter', () => {
-    cursor.style.width = '28px';
-    cursor.style.height = '28px';
-    cursor.style.background = 'rgba(200,75,49,.35)';
-  });
-  el.addEventListener('mouseleave', () => {
-    cursor.style.width = '14px';
-    cursor.style.height = '14px';
-    cursor.style.background = 'var(--rust)';
-  });
+
+
+function animateTrail(){
+
+trailX += (mouseX-trailX)*0.12;
+trailY += (mouseY-trailY)*0.12;
+
+
+trail.style.transform =
+`translate(${trailX-19}px,${trailY-19}px)`;
+
+
+requestAnimationFrame(animateTrail);
+
+}
+
+
+animateTrail();
+
+
+
+
+
+// Cursor hover effect
+
+
+document
+.querySelectorAll("a,button,.project-card,.design-card")
+.forEach(item=>{
+
+
+item.addEventListener("mouseenter",()=>{
+
+cursor.style.width="30px";
+cursor.style.height="30px";
+cursor.style.background="rgba(200,75,49,.5)";
+
 });
 
+
+item.addEventListener("mouseleave",()=>{
+
+cursor.style.width="14px";
+cursor.style.height="14px";
+cursor.style.background="var(--rust)";
+
+});
+
+
+});
+
+
+
+
+
+
+
+// =====================
+// TAB SWITCHING
+// =====================
+
+
+const tabs =
+document.querySelectorAll(".work-tab");
+
+
+const panels =
+document.querySelectorAll(".work-panel");
+
+
+
+tabs.forEach(tab=>{
+
+
+tab.addEventListener("click",()=>{
+
+
+tabs.forEach(t=>
+t.classList.remove("active")
+);
+
+
+tab.classList.add("active");
+
+
+
+let target =
+tab.dataset.tab;
+
+
+
+panels.forEach(panel=>{
+
+
+panel.classList.remove("active");
+
+
+
+if(panel.id===target){
+
+panel.classList.add("active");
+
+}
+
+
+});
+
+
+});
+
+
+});
+
+
+
+
+
+
+
+// =====================
+// SCROLL REVEAL
+// =====================
+
+
+const revealElements =
+document.querySelectorAll(".reveal");
+
+
+
+const observer =
+new IntersectionObserver((entries)=>{
+
+
+entries.forEach(entry=>{
+
+
+if(entry.isIntersecting){
+
+entry.target.classList.add("visible");
+
+observer.unobserve(entry.target);
+
+}
+
+
+});
+
+
+},{
+threshold:.15
+
+});
+
+
+
+revealElements.forEach(el=>{
+
+observer.observe(el);
+
+});
+
+
+
+
+
+
+
+
+// =====================
+// VIDEO POPUP
+// =====================
+
+
+
+const videoCards =
+document.querySelectorAll(".video-card");
+
+
+
+videoCards.forEach(card=>{
+
+
+card.addEventListener("click",()=>{
+
+
+const video =
+card.dataset.video;
+
+
+
+if(!video) return;
+
+
+
+openVideo(video);
+
+
+});
+
+
+});
+
+
+
+
+
+function openVideo(src){
+
+
+
+const modal =
+document.createElement("div");
+
+
+modal.className="video-popup";
+
+
+
+modal.innerHTML=`
+
+<div class="popup-content">
+
+<button class="close-video">
+✕
+</button>
+
+<video autoplay controls>
+
+<source src="${src}">
+
+</video>
+
+
+</div>
+
+`;
+
+
+
+document.body.appendChild(modal);
+
+
+
+document.body.style.overflow="hidden";
+
+
+
+modal
+.querySelector(".close-video")
+.onclick=()=>{
+
+
+modal.remove();
+
+document.body.style.overflow="";
+
+
+};
+
+
+
+modal.onclick=(e)=>{
+
+
+if(e.target===modal){
+
+modal.remove();
+
+document.body.style.overflow="";
+
+}
+
+
+};
+
+
+
+}
+
+
+
+
+
+
+// =====================
+// HERO PARALLAX
+// =====================
+
+
+const blob =
+document.querySelector(".blob-wrap");
+
+
+
+document.addEventListener("mousemove",(e)=>{
+
+
+let x =
+(e.clientX/window.innerWidth-.5)*20;
+
+
+let y =
+(e.clientY/window.innerHeight-.5)*20;
+
+
+
+if(blob){
+
+blob.style.transform=
+`translate(${x}px,${y}px)`;
+
+}
+
+
+});
+
+
+
+
+
+// =====================
+// SMOOTH NAVIGATION
+// =====================
+
+
+document
+.querySelectorAll("a[href^='#']")
+.forEach(link=>{
+
+
+link.addEventListener("click",(e)=>{
+
+
+const target =
+document.querySelector(
+link.getAttribute("href")
+);
+
+
+
+if(target){
+
+e.preventDefault();
+
+
+target.scrollIntoView({
+
+behavior:"smooth"
+
+});
+
+
+}
+
+
+});
+
+
+});
 // ── Work Tabs
 const workTabs = document.querySelectorAll('.work-tab');
 const workPanels = document.querySelectorAll('.work-panel');
