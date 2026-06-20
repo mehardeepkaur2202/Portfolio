@@ -1,467 +1,139 @@
-/* =========================
-   PAGE LOADER
-========================= */
-
-window.addEventListener("load", () => {
-
-    const loader = document.querySelector(".loader");
-
-    setTimeout(() => {
-        loader.classList.add("done");
-    }, 700);
-
+// ── Loader
+window.addEventListener('load',()=>{
+  setTimeout(()=>{ document.getElementById('loader').classList.add('done'); },1500);
 });
 
-
-
-/* =========================
-   CUSTOM CURSOR
-========================= */
-
-const cursor = document.querySelector("#cursor");
-const trail = document.querySelector("#cursor-trail");
-
-let mouseX = 0;
-let mouseY = 0;
-let trailX = 0;
-let trailY = 0;
-
-
-document.addEventListener("mousemove", (e)=>{
-
-    mouseX = e.clientX;
-    mouseY = e.clientY;
-
-    if(cursor){
-        cursor.style.transform =
-        `translate(${mouseX}px, ${mouseY}px)`;
-    }
-
+// ── Cursor
+const cursor=document.getElementById('cursor');
+const trail=document.getElementById('cursor-trail');
+let mx=0,my=0,tx=0,ty=0;
+document.addEventListener('mousemove',e=>{
+  mx=e.clientX; my=e.clientY;
+  cursor.style.transform=`translate(${mx-7}px,${my-7}px)`;
+});
+(function animTrail(){
+  tx+=(mx-tx)*.12; ty+=(my-ty)*.12;
+  trail.style.transform=`translate(${tx-19}px,${ty-19}px)`;
+  requestAnimationFrame(animTrail);
+})();
+document.querySelectorAll('a,button,.video-card,.design-card,.service-item,.skill-tag').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{ cursor.style.width='28px'; cursor.style.height='28px'; cursor.style.background='rgba(200,75,49,.35)'; });
+  el.addEventListener('mouseleave',()=>{ cursor.style.width='14px'; cursor.style.height='14px'; cursor.style.background='var(--rust)'; });
 });
 
-
-function animateTrail(){
-
-    trailX += (mouseX - trailX) * .15;
-    trailY += (mouseY - trailY) * .15;
-
-    if(trail){
-        trail.style.transform =
-        `translate(${trailX}px, ${trailY}px)`;
-    }
-
-    requestAnimationFrame(animateTrail);
-
+// ── Work Tabs
+const workTabs=document.querySelectorAll('.work-tab');
+const workPanels=document.querySelectorAll('.work-panel');
+workTabs.forEach(tab=>{
+  tab.addEventListener('click',()=>{
+    workTabs.forEach(t=>t.classList.remove('active'));
+    tab.classList.add('active');
+    const target=tab.dataset.tab;
+    workPanels.forEach(panel=>{
+      panel.classList.remove('active');
+      if(panel.id===target) panel.classList.add('active');
+    });
+    panel_reveals();
+  });
+});
+function panel_reveals(){
+  document.querySelectorAll('.reveal:not(.visible)').forEach(el=>obs.observe(el));
 }
 
-animateTrail();
+// ── Scroll reveal
+const revealEls=document.querySelectorAll('.reveal');
+const obs=new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{ if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);} });
+},{threshold:.08});
+revealEls.forEach(el=>obs.observe(el));
 
+// ── VIDEO MODAL (click video card → fullscreen with sound)
+const vidModal=document.getElementById('vidModal');
+const vidPlayer=document.getElementById('vidModalPlayer');
+const vidTitle=document.getElementById('vidModalTitle');
+const vidModalClose=document.getElementById('vidModalClose');
 
-
-document.querySelectorAll(
-"a,button,.video-card,.design-card"
-).forEach(item=>{
-
-
-item.addEventListener("mouseenter",()=>{
-
-    cursor.style.width="30px";
-    cursor.style.height="30px";
-
+document.querySelectorAll('.video-card').forEach(card=>{
+  card.addEventListener('click',()=>{
+    const src=card.dataset.src;
+    if(!src) return; // no video assigned yet, do nothing
+    const name=card.querySelector('.card-name-v');
+    vidPlayer.src=src;
+    vidTitle.textContent=name ? name.textContent : '';
+    vidModal.classList.add('open');
+    document.body.style.overflow='hidden';
+    vidPlayer.play();
+  });
 });
 
-
-item.addEventListener("mouseleave",()=>{
-
-    cursor.style.width="14px";
-    cursor.style.height="14px";
-
-});
-
-
-});
-
-
-
-/* =========================
-   SCROLL REVEAL
-========================= */
-
-
-const revealElements =
-document.querySelectorAll(".reveal");
-
-
-const observer =
-new IntersectionObserver((entries)=>{
-
-
-entries.forEach(entry=>{
-
-
-if(entry.isIntersecting){
-
-entry.target.classList.add("visible");
-
-observer.unobserve(entry.target);
-
+function closeVidModal(){
+  vidModal.classList.remove('open');
+  vidPlayer.pause();
+  vidPlayer.src='';
+  document.body.style.overflow='';
 }
+vidModalClose.addEventListener('click',closeVidModal);
+vidModal.addEventListener('click',e=>{ if(e.target===vidModal) closeVidModal(); });
 
+// ── SPLIT LIGHTBOX (click design card → split panels)
+const backdrop=document.getElementById('splitBackdrop');
+const stage=document.getElementById('splitStage');
+const splitClose=document.getElementById('splitClose');
 
+document.querySelectorAll('.design-card').forEach(card=>{
+  card.addEventListener('click',()=>{
+    const splits=JSON.parse(card.dataset.splits||'[]');
+    stage.innerHTML='';
+    splits.forEach((s,i)=>{
+      const panel=document.createElement('div');
+      panel.className='split-panel';
+      if(s.src){
+        const img=document.createElement('img');
+        img.src=s.src;
+        img.className='split-panel-thumb';
+        panel.appendChild(img);
+      } else {
+        const thumb=document.createElement('div');
+        thumb.className='split-panel-thumb';
+        thumb.style.background=s.bg;
+        thumb.style.aspectRatio= i===0?'3/4': i===1?'4/5':'1/1';
+        panel.appendChild(thumb);
+      }
+      if(i===0){
+        const badge=document.createElement('div');
+        badge.className='split-badge';
+        badge.textContent=`${splits.length} VIEWS`;
+        panel.appendChild(badge);
+      }
+      const info=document.createElement('div');
+      info.className='split-panel-info';
+      info.innerHTML=`<strong>${s.label}</strong>${s.sub}`;
+      panel.appendChild(info);
+      stage.appendChild(panel);
+    });
+    backdrop.classList.add('open');
+    document.body.style.overflow='hidden';
+  });
 });
 
-
-},{threshold:.15});
-
-
-
-revealElements.forEach(el=>{
-
-observer.observe(el);
-
-});
-
-
-
-
-
-/* =========================
-   VIDEO MODAL
-========================= */
-
-
-const videoModal =
-document.querySelector("#videoModal");
-
-const modalVideo =
-document.querySelector("#modalVideo");
-
-const closeVideo =
-document.querySelector("#videoModalClose");
-
-
-
-document.querySelectorAll(".video-card")
-.forEach(card=>{
-
-
-card.addEventListener("click",()=>{
-
-
-let source =
-card.getAttribute("data-src");
-
-
-if(!source) return;
-
-
-modalVideo.src = source;
-
-videoModal.classList.add("active");
-
-document.body.style.overflow="hidden";
-
-
-modalVideo.play();
-
-
-});
-
-
-});
-
-
-
-function closeModal(){
-
-videoModal.classList.remove("active");
-
-modalVideo.pause();
-
-modalVideo.src="";
-
-document.body.style.overflow="";
-
-
+function closeSplit(){
+  backdrop.classList.remove('open');
+  document.body.style.overflow='';
+  setTimeout(()=>{ stage.innerHTML=''; },500);
 }
+splitClose.addEventListener('click',closeSplit);
+backdrop.addEventListener('click',e=>{ if(e.target===backdrop) closeSplit(); });
 
-
-
-if(closeVideo){
-
-closeVideo.onclick = closeModal;
-
-}
-
-
-
-videoModal.addEventListener("click",(e)=>{
-
-
-if(e.target === videoModal){
-
-closeModal();
-
-}
-
-
+// ── Escape closes both modals
+document.addEventListener('keydown',e=>{
+  if(e.key==='Escape'){ closeVidModal(); closeSplit(); }
 });
 
-
-
-document.addEventListener("keydown",(e)=>{
-
-
-if(e.key==="Escape"){
-
-closeModal();
-
-}
-
-
-});
-
-
-
-
-
-
-/* =========================
-   GRAPHICS LIGHTBOX
-========================= */
-
-
-const backdrop =
-document.querySelector("#splitBackdrop");
-
-
-const stage =
-document.querySelector("#splitStage");
-
-
-const splitClose =
-document.querySelector("#splitClose");
-
-
-
-document.querySelectorAll(".design-card")
-.forEach(card=>{
-
-
-card.addEventListener("click",()=>{
-
-
-let images =
-JSON.parse(
-card.dataset.splits || "[]"
-);
-
-
-stage.innerHTML="";
-
-
-
-images.forEach((item)=>{
-
-
-let box =
-document.createElement("div");
-
-
-box.className="split-panel";
-
-
-
-if(item.src){
-
-
-box.innerHTML = `
-
-<img 
-src="${item.src}" 
-class="split-panel-thumb"
->
-
-
-<div class="split-panel-info">
-
-<strong>
-${item.label}
-</strong>
-
-${item.sub}
-
-</div>
-
-`;
-
-
-
-}
-else{
-
-
-box.innerHTML=`
-
-<div 
-class="split-panel-thumb"
-style="background:${item.bg}"
-></div>
-
-
-<div class="split-panel-info">
-
-<strong>
-${item.label}
-</strong>
-
-${item.sub}
-
-</div>
-
-`;
-
-}
-
-
-
-stage.appendChild(box);
-
-
-
-});
-
-
-
-backdrop.classList.add("open");
-
-document.body.style.overflow="hidden";
-
-
-
-});
-
-
-});
-
-
-
-
-
-function closeGallery(){
-
-backdrop.classList.remove("open");
-
-document.body.style.overflow="";
-
-
-setTimeout(()=>{
-
-stage.innerHTML="";
-
-},400);
-
-
-}
-
-
-
-if(splitClose){
-
-splitClose.onclick=closeGallery;
-
-}
-
-
-
-backdrop.addEventListener("click",(e)=>{
-
-
-if(e.target===backdrop){
-
-closeGallery();
-
-}
-
-
-});
-
-
-
-
-
-document.addEventListener("keydown",(e)=>{
-
-
-if(e.key==="Escape"){
-
-closeGallery();
-
-}
-
-
-});
-
-
-
-
-
-
-/* =========================
-   MOBILE VIDEO OPTIMIZATION
-========================= */
-
-
-const videos =
-document.querySelectorAll("video");
-
-
-videos.forEach(video=>{
-
-
-video.setAttribute(
-"playsinline",
-""
-);
-
-
-video.muted=true;
-
-
-
-});
-
-
-
-
-
-
-/* =========================
-   HERO PARALLAX
-========================= */
-
-
-const blob =
-document.querySelector(".blob-wrap");
-
-
-document.addEventListener("mousemove",(e)=>{
-
-
-if(!blob) return;
-
-
-let x =
-(e.clientX/window.innerWidth-.5)*15;
-
-
-let y =
-(e.clientY/window.innerHeight-.5)*15;
-
-
-
-blob.style.transform =
-`translate(${x}px,${y}px)`;
-
-
+// ── Parallax on blob
+document.addEventListener('mousemove',e=>{
+  const px=(e.clientX/window.innerWidth-.5)*18;
+  const py=(e.clientY/window.innerHeight-.5)*12;
+  document.querySelectorAll('.blob-wrap').forEach(el=>{
+    el.style.transform=`translate(${px*.4}px,${py*.4}px)`;
+  });
 });
