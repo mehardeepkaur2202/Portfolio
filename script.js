@@ -1,96 +1,80 @@
-// =====================
-// LOADER
-// =====================
+/* =========================
+   PAGE LOADER
+========================= */
 
-window.addEventListener("load",()=>{
+window.addEventListener("load", () => {
 
-setTimeout(()=>{
+    const loader = document.querySelector(".loader");
 
-document
-.getElementById("loader")
-.classList.add("done");
-
-},1500);
+    setTimeout(() => {
+        loader.classList.add("done");
+    }, 700);
 
 });
 
 
 
+/* =========================
+   CUSTOM CURSOR
+========================= */
 
-// =====================
-// CUSTOM CURSOR
-// =====================
-
-
-const cursor = document.getElementById("cursor");
-const trail = document.getElementById("cursor-trail");
-
+const cursor = document.querySelector("#cursor");
+const trail = document.querySelector("#cursor-trail");
 
 let mouseX = 0;
 let mouseY = 0;
-
 let trailX = 0;
 let trailY = 0;
 
 
+document.addEventListener("mousemove", (e)=>{
 
-document.addEventListener("mousemove",(e)=>{
+    mouseX = e.clientX;
+    mouseY = e.clientY;
 
-mouseX = e.clientX;
-mouseY = e.clientY;
-
-
-cursor.style.transform =
-`translate(${mouseX-7}px,${mouseY-7}px)`;
+    if(cursor){
+        cursor.style.transform =
+        `translate(${mouseX}px, ${mouseY}px)`;
+    }
 
 });
 
 
-
-
 function animateTrail(){
 
-trailX += (mouseX-trailX)*0.12;
-trailY += (mouseY-trailY)*0.12;
+    trailX += (mouseX - trailX) * .15;
+    trailY += (mouseY - trailY) * .15;
 
+    if(trail){
+        trail.style.transform =
+        `translate(${trailX}px, ${trailY}px)`;
+    }
 
-trail.style.transform =
-`translate(${trailX-19}px,${trailY-19}px)`;
-
-
-requestAnimationFrame(animateTrail);
+    requestAnimationFrame(animateTrail);
 
 }
-
 
 animateTrail();
 
 
 
-
-
-// Cursor hover effect
-
-
-document
-.querySelectorAll("a,button,.project-card,.design-card")
-.forEach(item=>{
+document.querySelectorAll(
+"a,button,.video-card,.design-card"
+).forEach(item=>{
 
 
 item.addEventListener("mouseenter",()=>{
 
-cursor.style.width="30px";
-cursor.style.height="30px";
-cursor.style.background="rgba(200,75,49,.5)";
+    cursor.style.width="30px";
+    cursor.style.height="30px";
 
 });
 
 
 item.addEventListener("mouseleave",()=>{
 
-cursor.style.width="14px";
-cursor.style.height="14px";
-cursor.style.background="var(--rust)";
+    cursor.style.width="14px";
+    cursor.style.height="14px";
 
 });
 
@@ -99,80 +83,13 @@ cursor.style.background="var(--rust)";
 
 
 
-
-
-
-
-// =====================
-// TAB SWITCHING
-// =====================
-
-
-const tabs =
-document.querySelectorAll(".work-tab");
-
-
-const panels =
-document.querySelectorAll(".work-panel");
-
-
-
-tabs.forEach(tab=>{
-
-
-tab.addEventListener("click",()=>{
-
-
-tabs.forEach(t=>
-t.classList.remove("active")
-);
-
-
-tab.classList.add("active");
-
-
-
-let target =
-tab.dataset.tab;
-
-
-
-panels.forEach(panel=>{
-
-
-panel.classList.remove("active");
-
-
-
-if(panel.id===target){
-
-panel.classList.add("active");
-
-}
-
-
-});
-
-
-});
-
-
-});
-
-
-
-
-
-
-
-// =====================
-// SCROLL REVEAL
-// =====================
+/* =========================
+   SCROLL REVEAL
+========================= */
 
 
 const revealElements =
 document.querySelectorAll(".reveal");
-
 
 
 const observer =
@@ -194,10 +111,7 @@ observer.unobserve(entry.target);
 });
 
 
-},{
-threshold:.15
-
-});
+},{threshold:.15});
 
 
 
@@ -211,36 +125,44 @@ observer.observe(el);
 
 
 
+/* =========================
+   VIDEO MODAL
+========================= */
+
+
+const videoModal =
+document.querySelector("#videoModal");
+
+const modalVideo =
+document.querySelector("#modalVideo");
+
+const closeVideo =
+document.querySelector("#videoModalClose");
 
 
 
-// =====================
-// VIDEO POPUP
-// =====================
-
-
-
-const videoCards =
-document.querySelectorAll(".video-card");
-
-
-
-videoCards.forEach(card=>{
+document.querySelectorAll(".video-card")
+.forEach(card=>{
 
 
 card.addEventListener("click",()=>{
 
 
-const video =
-card.dataset.video;
+let source =
+card.getAttribute("data-src");
 
 
-
-if(!video) return;
-
+if(!source) return;
 
 
-openVideo(video);
+modalVideo.src = source;
+
+videoModal.classList.add("active");
+
+document.body.style.overflow="hidden";
+
+
+modalVideo.play();
 
 
 });
@@ -250,34 +172,124 @@ openVideo(video);
 
 
 
+function closeModal(){
+
+videoModal.classList.remove("active");
+
+modalVideo.pause();
+
+modalVideo.src="";
+
+document.body.style.overflow="";
 
 
-function openVideo(src){
+}
 
 
 
-const modal =
+if(closeVideo){
+
+closeVideo.onclick = closeModal;
+
+}
+
+
+
+videoModal.addEventListener("click",(e)=>{
+
+
+if(e.target === videoModal){
+
+closeModal();
+
+}
+
+
+});
+
+
+
+document.addEventListener("keydown",(e)=>{
+
+
+if(e.key==="Escape"){
+
+closeModal();
+
+}
+
+
+});
+
+
+
+
+
+
+/* =========================
+   GRAPHICS LIGHTBOX
+========================= */
+
+
+const backdrop =
+document.querySelector("#splitBackdrop");
+
+
+const stage =
+document.querySelector("#splitStage");
+
+
+const splitClose =
+document.querySelector("#splitClose");
+
+
+
+document.querySelectorAll(".design-card")
+.forEach(card=>{
+
+
+card.addEventListener("click",()=>{
+
+
+let images =
+JSON.parse(
+card.dataset.splits || "[]"
+);
+
+
+stage.innerHTML="";
+
+
+
+images.forEach((item)=>{
+
+
+let box =
 document.createElement("div");
 
 
-modal.className="video-popup";
+box.className="split-panel";
 
 
 
-modal.innerHTML=`
+if(item.src){
 
-<div class="popup-content">
 
-<button class="close-video">
-✕
-</button>
+box.innerHTML = `
 
-<video autoplay controls>
+<img 
+src="${item.src}" 
+class="split-panel-thumb"
+>
 
-<source src="${src}">
 
-</video>
+<div class="split-panel-info">
 
+<strong>
+${item.label}
+</strong>
+
+${item.sub}
 
 </div>
 
@@ -285,256 +297,171 @@ modal.innerHTML=`
 
 
 
-document.body.appendChild(modal);
+}
+else{
 
 
+box.innerHTML=`
+
+<div 
+class="split-panel-thumb"
+style="background:${item.bg}"
+></div>
+
+
+<div class="split-panel-info">
+
+<strong>
+${item.label}
+</strong>
+
+${item.sub}
+
+</div>
+
+`;
+
+}
+
+
+
+stage.appendChild(box);
+
+
+
+});
+
+
+
+backdrop.classList.add("open");
 
 document.body.style.overflow="hidden";
 
 
 
-modal
-.querySelector(".close-video")
-.onclick=()=>{
+});
 
 
-modal.remove();
-
-document.body.style.overflow="";
-
-
-};
+});
 
 
 
-modal.onclick=(e)=>{
 
 
-if(e.target===modal){
+function closeGallery(){
 
-modal.remove();
+backdrop.classList.remove("open");
 
 document.body.style.overflow="";
 
-}
 
+setTimeout(()=>{
 
-};
+stage.innerHTML="";
 
+},400);
 
 
 }
 
 
 
+if(splitClose){
+
+splitClose.onclick=closeGallery;
+
+}
 
 
 
-// =====================
-// HERO PARALLAX
-// =====================
+backdrop.addEventListener("click",(e)=>{
+
+
+if(e.target===backdrop){
+
+closeGallery();
+
+}
+
+
+});
+
+
+
+
+
+document.addEventListener("keydown",(e)=>{
+
+
+if(e.key==="Escape"){
+
+closeGallery();
+
+}
+
+
+});
+
+
+
+
+
+
+/* =========================
+   MOBILE VIDEO OPTIMIZATION
+========================= */
+
+
+const videos =
+document.querySelectorAll("video");
+
+
+videos.forEach(video=>{
+
+
+video.setAttribute(
+"playsinline",
+""
+);
+
+
+video.muted=true;
+
+
+
+});
+
+
+
+
+
+
+/* =========================
+   HERO PARALLAX
+========================= */
 
 
 const blob =
 document.querySelector(".blob-wrap");
 
 
-
 document.addEventListener("mousemove",(e)=>{
 
 
+if(!blob) return;
+
+
 let x =
-(e.clientX/window.innerWidth-.5)*20;
+(e.clientX/window.innerWidth-.5)*15;
 
 
 let y =
-(e.clientY/window.innerHeight-.5)*20;
+(e.clientY/window.innerHeight-.5)*15;
 
 
 
-if(blob){
-
-blob.style.transform=
+blob.style.transform =
 `translate(${x}px,${y}px)`;
 
-}
 
-
-});
-
-
-
-
-
-// =====================
-// SMOOTH NAVIGATION
-// =====================
-
-
-document
-.querySelectorAll("a[href^='#']")
-.forEach(link=>{
-
-
-link.addEventListener("click",(e)=>{
-
-
-const target =
-document.querySelector(
-link.getAttribute("href")
-);
-
-
-
-if(target){
-
-e.preventDefault();
-
-
-target.scrollIntoView({
-
-behavior:"smooth"
-
-});
-
-
-}
-
-
-});
-
-
-});
-// ── Work Tabs
-const workTabs = document.querySelectorAll('.work-tab');
-const workPanels = document.querySelectorAll('.work-panel');
-
-workTabs.forEach(tab => {
-  tab.addEventListener('click', () => {
-    workTabs.forEach(t => t.classList.remove('active'));
-    tab.classList.add('active');
-    const target = tab.dataset.tab;
-    workPanels.forEach(panel => {
-      panel.classList.remove('active');
-      if (panel.id === target) panel.classList.add('active');
-    });
-    panel_reveals();
-  });
-});
-
-function panel_reveals() {
-  const revealEls = document.querySelectorAll('.reveal:not(.visible)');
-  revealEls.forEach(el => obs.observe(el));
-}
-
-// ── Scroll Reveal
-const revealEls = document.querySelectorAll('.reveal');
-const obs = new IntersectionObserver((entries) => {
-  entries.forEach(e => {
-    if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
-  });
-}, { threshold: .08 });
-revealEls.forEach(el => obs.observe(el));
-
-// ── Video Modal
-const videoModal = document.getElementById('videoModal');
-const modalVideo = document.getElementById('modalVideo');
-const modalClose = document.getElementById('videoModalClose');
-
-function openVideoModal(src) {
-  if (!src) return;
-  modalVideo.src = src;
-  videoModal.classList.add('active');
-  document.body.style.overflow = 'hidden';
-  modalVideo.play();
-}
-
-function closeVideoModal() {
-  videoModal.classList.remove('active');
-  modalVideo.pause();
-  modalVideo.src = '';
-  document.body.style.overflow = '';
-}
-
-document.querySelectorAll('.video-card').forEach(card => {
-  card.addEventListener('click', () => {
-    const src = card.dataset.src;
-    openVideoModal(src);
-  });
-});
-
-modalClose.addEventListener('click', closeVideoModal);
-
-videoModal.addEventListener('click', e => {
-  if (e.target === videoModal) closeVideoModal();
-});
-
-document.addEventListener('keydown', e => {
-  if (e.key === 'Escape') closeVideoModal();
-});
-
-// ── Split Lightbox (design cards)
-const backdrop = document.getElementById('splitBackdrop');
-const stage = document.getElementById('splitStage');
-const splitClose = document.getElementById('splitClose');
-
-document.querySelectorAll('.design-card').forEach(card => {
-  card.addEventListener('click', () => {
-    const splits = JSON.parse(card.dataset.splits || '[]');
-
-    stage.innerHTML = '';
-    splits.forEach((s, i) => {
-      const panel = document.createElement('div');
-      panel.className = 'split-panel';
-
-      if (s.src) {
-        const img = document.createElement('img');
-        img.src = s.src;
-        img.className = 'split-panel-thumb';
-        panel.appendChild(img);
-      } else {
-        const thumb = document.createElement('div');
-        thumb.className = 'split-panel-thumb';
-        thumb.style.cssText = `background:${s.bg};width:100%;`;
-        thumb.style.aspectRatio = i === 0 ? '3/4' : i === 1 ? '4/5' : '1/1';
-        panel.appendChild(thumb);
-      }
-
-      if (i === 0) {
-        const badge = document.createElement('div');
-        badge.className = 'split-badge';
-        badge.textContent = `${splits.length} VIEWS`;
-        panel.appendChild(badge);
-      }
-
-      const info = document.createElement('div');
-      info.className = 'split-panel-info';
-      info.innerHTML = `<strong>${s.label}</strong>${s.sub}`;
-      panel.appendChild(info);
-
-      stage.appendChild(panel);
-    });
-
-    backdrop.classList.add('open');
-    document.body.style.overflow = 'hidden';
-  });
-});
-
-function closeSplit() {
-  backdrop.classList.remove('open');
-  document.body.style.overflow = '';
-  setTimeout(() => { stage.innerHTML = ''; }, 500);
-}
-
-splitClose.addEventListener('click', closeSplit);
-backdrop.addEventListener('click', e => { if (e.target === backdrop) closeSplit(); });
-document.addEventListener('keydown', e => { if (e.key === 'Escape') closeSplit(); });
-
-// ── Parallax on hero blob
-document.addEventListener('mousemove', e => {
-  const px = (e.clientX / window.innerWidth - .5) * 18;
-  const py = (e.clientY / window.innerHeight - .5) * 12;
-  document.querySelectorAll('.blob-wrap').forEach(el => {
-    el.style.transform = `translate(${px * .4}px,${py * .4}px)`;
-  });
 });
