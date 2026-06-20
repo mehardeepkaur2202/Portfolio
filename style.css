@@ -439,7 +439,8 @@ footer p{font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:rgb
 }
 @media(max-width:900px){
   .hero{grid-template-columns:1fr;padding-top:100px;text-align:center;}
-  .hero-right{display:none;}
+  .hero-right{height:50vh;margin-top:2rem;}
+  .blob-wrap{width:min(280px,70%);}
   .about{grid-template-columns:1fr;}
   .services-grid{grid-template-columns:1fr;}
   .section-header{grid-template-columns:auto 1fr;}
