@@ -105,14 +105,14 @@
   <!-- HOW TO ADD YOUR VIDEO:
        1. Put your video file in the SAME folder as this HTML file
        2. Set data-src="yourfilename.mp4" on the video-card div
-       3. Replace <div class="card-thumb"></div> with <video class="card-thumb" src="yourfilename.mp4" autoplay muted loop playsinline></video>
+       3. Replace <div class="card-thumb"></div> with <video class="card-thumb" src="yourfilename.mp4" autoplay muted loop playsinline ></video>
        Example: data-src="save2.mp4" and <video class="card-thumb" src="save2.mp4" autoplay muted loop playsinline></video>
   -->
   <div class="work-panel active" id="motion">
     <div class="video-grid">
 
       <div class="video-card reveal" data-src="wedding video .1.mp4">
-        <video class="card-thumb" src="wedding video .1.mp4" autoplay muted loop playsinline></video>
+        <video class="card-thumb" src="wedding video .1.mp4" autoplay muted loop playsinline preload="metadata"></video>
         <div class="card-label-v">Featured</div>
         <div class="play-btn">
           <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
