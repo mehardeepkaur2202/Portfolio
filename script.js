@@ -137,3 +137,30 @@ document.addEventListener('mousemove',e=>{
     el.style.transform=`translate(${px*.4}px,${py*.4}px)`;
   });
 });
+// ── Parallax on blob
+document.addEventListener('mousemove',e=>{
+  const px=(e.clientX/window.innerWidth-.5)*18;
+  const py=(e.clientY/window.innerHeight-.5)*12;
+  document.querySelectorAll('.blob-wrap').forEach(el=>{
+    el.style.transform=`translate(${px*.4}px,${py*.4}px)`;
+  });
+});
+
+// ← PASTE THE NEW CODE HERE
+
+// Only play video previews when they're visible on screen
+const videoObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    const video = entry.target.querySelector('video.card-thumb');
+    if (!video) return;
+    if (entry.isIntersecting) {
+      video.play().catch(()=>{});
+    } else {
+      video.pause();
+    }
+  });
+}, { threshold: 0.3 });
+
+document.querySelectorAll('.video-card').forEach(card => {
+  videoObserver.observe(card);
+});
