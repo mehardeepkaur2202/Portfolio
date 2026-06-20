@@ -1,487 +1,382 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Mehardeep Kaur | Motion & Graphic Designer</title>
-
+<title>Portfolio — Motion & Design</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:ital,wght@0,300;0,400;1,300&family=Playfair+Display:ital,wght@1,400;1,700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
-
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono&family=Playfair+Display:ital@1&display=swap" rel="stylesheet">
-
 </head>
-
-
 <body>
 
-
-<!-- LOADER -->
-
+<!-- Loader -->
 <div class="loader" id="loader">
-
-<div class="loader-text">
-LOADING
+  <div class="loader-text">
+    <span>L</span><span>O</span><span>A</span><span>D</span><span>I</span><span>N</span><span>G</span><span>…</span>
+  </div>
+  <div class="loader-bar"></div>
 </div>
 
-<div class="loader-bar"></div>
-
-</div>
-
-
-
-<!-- CURSOR -->
-
+<!-- Custom cursor -->
 <div id="cursor"></div>
 <div id="cursor-trail"></div>
 
-
-
-
 <!-- NAV -->
-
 <nav>
-
-<div class="logo">
-Mehardeep Kaur
-</div>
-
-
-<ul>
-
-<li><a href="#work">Work</a></li>
-
-<li><a href="#about">About</a></li>
-
-<li><a href="#skills">Skills</a></li>
-
-<li><a href="#contact">Contact</a></li>
-
-</ul>
-
-
+  <div class="logo">Mehardeep <span></span>Kaur</div>
+  <ul class="nav-links">
+    <li><a href="#work">Work</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
 </nav>
 
-
-
-
-
 <!-- HERO -->
-
 <section class="hero">
-
-
-<div class="hero-text">
-
-
-<p class="eyebrow">
-Motion & Graphic Designer
-</p>
-
-
-
-<h1>
-
-<span>MOTION</span>
-
-<br>
-
-<em>crafted with intent</em>
-
-<br>
-
-DESIGN
-
-</h1>
-
-
-
-<p class="hero-desc">
-
-Creating engaging visuals through motion graphics, video editing and graphic design. I transform ideas into digital experiences.
-
-</p>
-
-
-
-<a href="#work" class="btn">
-
-View My Work →
-
-</a>
-
-
-
-</div>
-
-
-
-<div class="hero-image">
-
-<img src="mehar_img.jpg">
-
-</div>
-
-
-
+  <div class="hero-left">
+    <div class="eyebrow reveal">
+      <div class="eyebrow-line"></div>
+      <span class="eyebrow-text">Motion & Design artist</span>
+    </div>
+    <h1 class="hero-title">
+      <span class="glitch" data-text="MOTION">MOTION</span><br>
+      <span class="italic-serif">crafted with intent</span>
+      DESIGN
+    </h1>
+    <p class="hero-desc reveal reveal-delay-1">
+      Graphic designer & video editor obsessed with the tension between structure and chaos — building visuals that feel alive.
+    </p>
+    <div class="cta-row reveal reveal-delay-2">
+      <a href="#work" class="btn-primary">
+        <span>View Selected Work</span>
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+      <a href="#contact" class="btn-ghost">
+        Let's Talk
+        <svg width="10" height="10" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M7 17L17 7M7 7h10v10"/></svg>
+      </a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="blob-wrap">
+      <div class="ring ring-1"><div class="ring-dot"></div></div>
+      <div class="ring ring-2"><div class="ring-dot-2"></div></div>
+      <img src="mehar_img.jpg" class="blob-img">
+      <div class="tag-tl">EST. 2026</div>
+      <div class="tag-br">PORTFOLIO</div>
+    </div>
+  </div>
 </section>
 
-
-
-
-
+<!-- MARQUEE -->
+<div class="marquee-section">
+  <div class="marquee-track">
+    <span>Motion Design</span><span class="accent">✦</span>
+    <span>Brand Identity</span><span class="accent">✦</span>
+    <span>Video Editing</span><span class="accent">✦</span>
+    <span>3D Animation</span><span class="accent">✦</span>
+    <span>Creative Direction</span><span class="accent">✦</span>
+    <span>Graphic Design</span><span class="accent">✦</span>
+    <span>Motion Design</span><span class="accent">✦</span>
+    <span>Brand Identity</span><span class="accent">✦</span>
+    <span>Video Editing</span><span class="accent">✦</span>
+    <span>3D Animation</span><span class="accent">✦</span>
+    <span>Creative Direction</span><span class="accent">✦</span>
+    <span>Graphic Design</span><span class="accent">✦</span>
+  </div>
+</div>
 
 <!-- WORK -->
-
-<section id="work" class="work">
-
-
-<h2>
-Selected <em>Work</em>
-</h2>
-
-
-
-
-<div class="tabs">
-
-<button class="work-tab active" data-tab="videos">
-Motion Graphics
-</button>
-
-
-<button class="work-tab" data-tab="graphics">
-Graphic Design
-</button>
-
-
-</div>
-
-
-
-
-
-
-
-<!-- VIDEOS -->
-
-<div class="work-panel active" id="videos">
-
-
-<div class="video-grid">
-
-
-
-<div class="video-card" data-video="new-reel-4.mp4">
-
-<video muted loop playsinline preload="metadata">
-<source src="new-reel-4.mp4">
-</video>
-
-<h3>Brand Reel</h3>
-
-</div>
-
-
-
-
-<div class="video-card" data-video="hearing-loss.mp4">
-
-<video muted loop playsinline preload="metadata">
-<source src="hearing-loss.mp4">
-</video>
-
-<h3>Awareness Motion</h3>
-
-</div>
-
-
-
-
-
-<div class="video-card" data-video="project-1.mp4">
-
-<video muted loop playsinline preload="metadata">
-<source src="project-1.mp4">
-</video>
-
-<h3>3D Product Animation</h3>
-
-</div>
-
-
-
-
-
-
-<div class="video-card" data-video="v3.mp4">
-
-<video muted loop playsinline preload="metadata">
-<source src="v3.mp4">
-</video>
-
-<h3>Showreel</h3>
-
-</div>
-
-
-
-
-
-<div class="video-card">
-
-<div class="placeholder">
-Coming Soon
-</div>
-
-<h3>Motion Project</h3>
-
-</div>
-
-
-
-
-
-<div class="video-card">
-
-<div class="placeholder">
-Coming Soon
-</div>
-
-<h3>Motion Project</h3>
-
-</div>
-
-
-
-</div>
-
-</div>
-
-
-
-
-
-
-
-
-
-
-<!-- GRAPHICS -->
-
-
-<div class="work-panel" id="graphics">
-
-
-<div class="design-grid">
-
-
-
-<div class="design-card">
-
-<img src="logo benny & joon.jpg">
-
-<h3>Benny & Joon</h3>
-
-</div>
-
-
-
-
-<div class="design-card">
-
-<img src="logo bennyjoon straight-0.jpg">
-
-<h3>Brand Identity</h3>
-
-</div>
-
-
-
-
-<div class="design-card">
-
-<h3>The Golden Hop</h3>
-
-</div>
-
-
-
-<div class="design-card">
-
-<h3>Packaging Design</h3>
-
-</div>
-
-
-
-<div class="design-card">
-
-<h3>Social Media Design</h3>
-
-</div>
-
-
-
-
-<div class="design-card">
-
-<h3>Poster Design</h3>
-
-</div>
-
-
-
-
-<div class="design-card">
-
-<h3>Menu Design</h3>
-
-</div>
-
-
-
-
-<div class="design-card">
-
-<h3>Typography Design</h3>
-
-</div>
-
-
-
-</div>
-
-</div>
-
-
-
+<section class="work" id="work">
+  <div class="section-header reveal">
+    <div class="section-num">02</div>
+    <div><div class="section-title">Selected<em>Work</em></div></div>
+  </div>
+
+  <!-- TABS -->
+  <div class="work-tabs reveal">
+    <button class="work-tab active" data-tab="motion"><span>Motion Graphics</span></button>
+    <button class="work-tab" data-tab="design"><span>Graphic Design</span></button>
+  </div>
+
+  <!-- MOTION PANEL -->
+  <!-- HOW TO ADD YOUR VIDEO:
+       1. Put your video file in the SAME folder as this HTML file
+       2. Set data-src="yourfilename.mp4" on the video-card div
+       3. Replace <div class="card-thumb"></div> with <video class="card-thumb" src="yourfilename.mp4" autoplay muted loop playsinline></video>
+       Example: data-src="save2.mp4" and <video class="card-thumb" src="save2.mp4" autoplay muted loop playsinline></video>
+  -->
+  <div class="work-panel active" id="motion">
+    <div class="video-grid">
+
+      <div class="video-card reveal" data-src="save2.mp4">
+        <video class="card-thumb" src="save2.mp4" autoplay muted loop playsinline></video>
+        <div class="card-label-v">Featured</div>
+        <div class="play-btn">
+          <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+        </div>
+        <div class="video-overlay">
+          <div class="card-tag-v">Brand Film</div>
+          <div class="card-name-v">KOVA Spirits</div>
+        </div>
+      </div>
+
+      <div class="video-card reveal reveal-delay-1" data-src="">
+        <div class="card-thumb"></div>
+        <div class="card-label-v">Motion</div>
+        <div class="play-btn">
+          <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+        </div>
+        <div class="video-overlay">
+          <div class="card-tag-v">Title Sequence</div>
+          <div class="card-name-v">Echoes Film</div>
+        </div>
+      </div>
+
+      <div class="video-card reveal reveal-delay-2" data-src="">
+        <div class="card-thumb"></div>
+        <div class="card-label-v">3D</div>
+        <div class="play-btn">
+          <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+        </div>
+        <div class="video-overlay">
+          <div class="card-tag-v">3D Animation</div>
+          <div class="card-name-v">Lune Watch</div>
+        </div>
+      </div>
+
+      <div class="video-card reveal reveal-delay-3" data-src="">
+        <div class="card-thumb"></div>
+        <div class="card-label-v">Reel</div>
+        <div class="play-btn">
+          <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+        </div>
+        <div class="video-overlay">
+          <div class="card-tag-v">Showreel</div>
+          <div class="card-name-v">2024 Reel</div>
+        </div>
+      </div>
+
+      <div class="video-card reveal" data-src="">
+        <div class="card-thumb"></div>
+        <div class="card-label-v">Edit</div>
+        <div class="play-btn">
+          <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+        </div>
+        <div class="video-overlay">
+          <div class="card-tag-v">Video Edit</div>
+          <div class="card-name-v">Project Five</div>
+        </div>
+      </div>
+
+      <div class="video-card reveal reveal-delay-1" data-src="">
+        <div class="card-thumb"></div>
+        <div class="card-label-v">Motion</div>
+        <div class="play-btn">
+          <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+        </div>
+        <div class="video-overlay">
+          <div class="card-tag-v">Animation</div>
+          <div class="card-name-v">Project Six</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- DESIGN PANEL -->
+  <div class="work-panel" id="design">
+    <div class="design-gallery">
+
+      <div class="design-card reveal" data-title="BENNY AND JOON" data-splits='[
+        {"bg":"linear-gradient(135deg,#1a0a0a,#5c1a0a)","src":"logo bennyjoon straight-01-01.jpg","label":"Logo System","sub":"Primary mark"},
+        {"bg":"linear-gradient(160deg,#3d1515,#1a0505)","src":"logo benny and joon.jpg","label":"Colour Palette","sub":"Brand colours"},
+        {"bg":"linear-gradient(135deg,#200a0a,#4a1010)","src":"logo on bread.jpg","label":"Packaging","sub":"Bottle wrap"}
+      ]'>
+        <img class="design-thumb" src="logo bennyjoon straight-01-01.jpg">
+        <div class="card-label-d">Brand</div>
+        <div class="design-overlay">
+          <div class="card-tag-d">Brand Identity</div>
+          <div class="card-name-d">BENNY AND JOON</div>
+        </div>
+      </div>
+
+      <div class="design-card reveal reveal-delay-1" data-title="Nova Records" data-splits='[
+        {"bg":"linear-gradient(135deg,#0a1a15,#0d3528)","label":"Main Poster","sub":"A2 print"},
+        {"bg":"linear-gradient(160deg,#0d3528,#0a2018)","label":"Digital Version","sub":"Social cut"}
+      ]'>
+        <div class="design-thumb"></div>
+        <div class="card-label-d">Poster</div>
+        <div class="design-overlay">
+          <div class="card-tag-d">Event Poster</div>
+          <div class="card-name-d">Nova Records</div>
+        </div>
+      </div>
+
+      <div class="design-card reveal reveal-delay-2" data-title="Arca Project" data-splits='[
+        {"bg":"linear-gradient(135deg,#0a0a1a,#1a1035)","label":"Feed Grid","sub":"Instagram"},
+        {"bg":"linear-gradient(160deg,#1a1035,#0d0a28)","label":"Story Set","sub":"16 templates"},
+        {"bg":"linear-gradient(135deg,#0d0a28,#1a1040)","label":"Highlight Covers","sub":"Icon system"}
+      ]'>
+        <div class="design-thumb"></div>
+        <div class="card-label-d">Social</div>
+        <div class="design-overlay">
+          <div class="card-tag-d">Social Media</div>
+          <div class="card-name-d">Arca Project</div>
+        </div>
+      </div>
+
+      <div class="design-card reveal reveal-delay-1" data-title="Echoes EP" data-splits='[
+        {"bg":"linear-gradient(135deg,#1a150a,#3d2f0a)","label":"Front Cover","sub":"Physical & digital"},
+        {"bg":"linear-gradient(160deg,#3d2f0a,#2a1f05)","label":"Back Cover","sub":"Tracklist layout"},
+        {"bg":"linear-gradient(135deg,#2a1f05,#1a1305)","label":"Vinyl Insert","sub":"Inner sleeve"}
+      ]'>
+        <div class="design-thumb"></div>
+        <div class="card-label-d">Album</div>
+        <div class="design-overlay">
+          <div class="card-tag-d">Album Artwork</div>
+          <div class="card-name-d">Echoes EP</div>
+        </div>
+      </div>
+
+      <div class="design-card reveal reveal-delay-2" data-title="Lune Watch" data-splits='[
+        {"bg":"linear-gradient(135deg,#0f0a1a,#251535)","label":"Box Design","sub":"Rigid gift box"},
+        {"bg":"linear-gradient(160deg,#251535,#180f28)","label":"Tag & Insert","sub":"Printed collateral"}
+      ]'>
+        <div class="design-thumb"></div>
+        <div class="card-label-d">Packaging</div>
+        <div class="design-overlay">
+          <div class="card-tag-d">Product Design</div>
+          <div class="card-name-d">Lune Watch</div>
+        </div>
+      </div>
+
+      <div class="design-card reveal reveal-delay-3" data-title="Type Study" data-splits='[
+        {"bg":"linear-gradient(135deg,#0a1515,#102828)","label":"Typeface Pairing","sub":"Display + body"},
+        {"bg":"linear-gradient(160deg,#102828,#0a1e1e)","label":"Specimen Sheet","sub":"A3 poster"},
+        {"bg":"linear-gradient(135deg,#0a1e1e,#0d2424)","label":"In Use","sub":"Applied samples"}
+      ]'>
+        <div class="design-thumb"></div>
+        <div class="card-label-d">Type</div>
+        <div class="design-overlay">
+          <div class="card-tag-d">Typography</div>
+          <div class="card-name-d">Type Study</div>
+        </div>
+      </div>
+
+      <div class="design-card reveal" data-title="Project Seven" data-splits='[
+        {"bg":"linear-gradient(135deg,#151a0a,#2f3d0a)","label":"Concept","sub":"Initial design"},
+        {"bg":"linear-gradient(160deg,#2f3d0a,#1f2a05)","label":"Final","sub":"Refined version"}
+      ]'>
+        <div class="design-thumb"></div>
+        <div class="card-label-d">Design</div>
+        <div class="design-overlay">
+          <div class="card-tag-d">Graphic Design</div>
+          <div class="card-name-d">Project Seven</div>
+        </div>
+      </div>
+
+      <div class="design-card reveal reveal-delay-1" data-title="Project Eight" data-splits='[
+        {"bg":"linear-gradient(135deg,#0a1a1a,#0a3d3d)","label":"Layout","sub":"Print spread"},
+        {"bg":"linear-gradient(160deg,#0a3d3d,#052a2a)","label":"Detail","sub":"Close-up"}
+      ]'>
+        <div class="design-thumb"></div>
+        <div class="card-label-d">Print</div>
+        <div class="design-overlay">
+          <div class="card-tag-d">Editorial Design</div>
+          <div class="card-name-d">Project Eight</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
 </section>
-
-
-
-
-
-
-
-
 
 <!-- ABOUT -->
-
-
-<section id="about" class="about">
-
-
-<h2>
-About <em>Me</em>
-</h2>
-
-
-
-<p>
-
-I'm Mehardeep Kaur, a multimedia designer specializing in graphic design, video editing and motion graphics.
-
-I create visual content for brands, social media and digital platforms using creative storytelling and design.
-
-</p>
-
-
-
+<section class="about" id="about">
+  <div class="about-img-wrap reveal">
+    <img src="about_img.jpg" class="about-img">
+    <div class="about-img-frame"></div>
+  </div>
+  <div class="about-text">
+    <h2 class="reveal"><em>About</em>Me</h2>
+    <p class="reveal reveal-delay-1">I'm a graphic designer and video editor who loves turning ideas into visuals that actually grab attention. Every project I take on gets the same care — clean design, sharp edits, and a lot of attention to the small details.</p>
+    <p class="reveal reveal-delay-2">I work independently with brands, artists, and creators who want their content to look and feel intentional. No fluff, no filler — just graphics and edits that do their job well.</p>
+    <div class="skills-list reveal reveal-delay-3">
+      <span class="skill-tag">After Effects</span>
+      <span class="skill-tag">Premiere Pro</span>
+      <span class="skill-tag">Photoshop</span>
+      <span class="skill-tag">Illustrator</span>
+      <span class="skill-tag">CapCut</span>
+      <span class="skill-tag">Figma</span>
+    </div>
+  </div>
 </section>
 
-
-
-
-
-
-
-
-
-<!-- SKILLS -->
-
-
-<section id="skills" class="skills">
-
-
-<h2>
-My <em>Skills</em>
-</h2>
-
-
-
-<div class="skill-list">
-
-<span>Photoshop</span>
-
-<span>Premiere Pro</span>
-
-<span>After Effects</span>
-
-<span>Canva</span>
-
-<span>CapCut</span>
-
-<span>Illustrator</span>
-
-<span>Motion Graphics</span>
-
-<span>Brand Design</span>
-
-
-</div>
-
-
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="section-header reveal">
+    <div class="section-num">03</div>
+    <div><div class="section-title">What I<em>Offer</em></div></div>
+  </div>
+  <div class="services-grid">
+    <div class="service-item reveal">
+      <div class="service-num">01</div>
+      <div class="service-name">Video Editing</div>
+      <p class="service-desc">Reels, brand films, title sequences, and social content that moves people — literally. Cut and edited frame by frame.</p>
+    </div>
+    <div class="service-item reveal reveal-delay-1">
+      <div class="service-num">02</div>
+      <div class="service-name">Graphic Design</div>
+      <p class="service-desc">Logos, posters, packaging, and brand visuals built with care. Clean, considered, and made to actually get noticed.</p>
+    </div>
+    <div class="service-item reveal reveal-delay-2">
+      <div class="service-num">03</div>
+      <div class="service-name">Social Media Content</div>
+      <p class="service-desc">Feed posts, story templates, and motion graphics tailored for platforms — designed to look sharp at every scroll.</p>
+    </div>
+  </div>
 </section>
-
-
-
-
-
-
-
 
 <!-- CONTACT -->
-
-
-<section id="contact" class="contact">
-
-
-<h2>
-Let's Create Something
-</h2>
-
-
-
-<a href="mailto:mehardeepkaur292@gmail.com">
-
-mehardeepkaur292@gmail.com
-
-</a>
-
-
+<section class="contact" id="contact">
+  <div class="reveal">
+    <p class="contact-sub">Ready to create something unusual?</p>
+    <div class="contact-big">LET'S TALK<span class="underscore"></span></div>
+  </div>
+  <br>
+  <a href="mailto:mehardeepkaur292@gmail.com" class="contact-email reveal reveal-delay-1">
+    mehardeepkaur292@gmail.com
+    <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M7 17L17 7M7 7h10v10"/></svg>
+  </a>
 </section>
 
+<!-- VIDEO MODAL — opens fullscreen with sound on click -->
+<div class="vid-modal" id="vidModal">
+  <button class="vid-modal-close" id="vidModalClose">✕</button>
+  <video id="vidModalPlayer" controls playsinline></video>
+  <div class="vid-modal-title" id="vidModalTitle"></div>
+</div>
 
+<!-- SPLIT LIGHTBOX — opens for design cards -->
+<div class="split-backdrop" id="splitBackdrop">
+  <button class="split-close" id="splitClose">✕</button>
+  <div class="split-stage" id="splitStage"></div>
+</div>
 
-
-
-
-
+<!-- FOOTER -->
 <footer>
-
-© Mehardeep Kaur
-
+  <p>© Mehardeep Kaur</p>
+  <div class="social-links">
+    <a href="#">Instagram</a>
+    <a href="#">Behance</a>
+    <a href="#">Dribbble</a>
+    <a href="#">LinkedIn</a>
+  </div>
 </footer>
 
-
-
-
 <script src="script.js"></script>
-
-
 </body>
-
 </html>
